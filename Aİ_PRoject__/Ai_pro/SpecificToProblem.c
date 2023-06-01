@@ -146,27 +146,46 @@ int Result(const State *const parent_state, const enum ACTIONS action, Transitio
 	new_state.Map_Size = parent_state->Map_Size;
 	//Print_State_with_size(parent_state->Map_Size, map);		
 	//	printf("Map Size ================ %d\n",parent_state->Map_Size);
-		 if (action == 0 && parent_state->coordinate.x + 1 <= parent_state->Map_Size * 2 && map[parent_state->coordinate.y][parent_state->coordinate.x + 1].x != -1 && parent_state->coordinate.x + 1 != -1 && parent_state->coordinate.y != -1 && parent_state->coordinate.x + 1 != -1 ){
+		 if (action == 0 && parent_state->coordinate.x + 1 <= parent_state->Map_Size * 2  
+		 && map[parent_state->coordinate.y][parent_state->coordinate.x + 1].x != -1 ){
 			new_state.coordinate.x = parent_state->coordinate.x + 1; 
 			new_state.coordinate.y = parent_state->coordinate.y;
-		 }else if (action == 1 && parent_state->coordinate.x - 1 != -1 && map[parent_state->coordinate.y][parent_state->coordinate.x - 1].x != -1 && parent_state->coordinate.y != -1){
+		 }
+		 else if (action == 1 && parent_state->coordinate.x - 1 != -1 
+		 && map[parent_state->coordinate.y][parent_state->coordinate.x - 1].x != -1 
+		 && parent_state->coordinate.y != -1){
 			new_state.coordinate.x = parent_state->coordinate.x - 1;
 			new_state.coordinate.y = parent_state->coordinate.y;
-		 }else if (action == 2 && !(parent_state->coordinate.x + 1 > parent_state->Map_Size * 2) && map[parent_state->coordinate.y - 1][parent_state->coordinate.x + 1].y != -1 && map[parent_state->coordinate.y - 1][parent_state->coordinate.x + 1].x != -1 && parent_state->coordinate.x + 1 != -1 && parent_state->coordinate.y - 1 != -1 ){
+		 }
+		 else if (action == 2 && !(parent_state->coordinate.x + 1 > parent_state->Map_Size * 2) 
+		 && map[parent_state->coordinate.y - 1][parent_state->coordinate.x + 1].y != -1 
+		 && map[parent_state->coordinate.y - 1][parent_state->coordinate.x + 1].x != -1 
+		 && parent_state->coordinate.x + 1 != -1 && parent_state->coordinate.y - 1 != -1 ){
 			new_state.coordinate.x = parent_state->coordinate.x + 1;
 			new_state.coordinate.y = parent_state->coordinate.y - 1;
-		 }else if (action == 3 && parent_state->coordinate.x != -1 && map[parent_state->coordinate.y - 1][parent_state->coordinate.x].y != -1 && parent_state->coordinate.y - 1 != -1 ){
+		 }
+		 else if (action == 3 && map[parent_state->coordinate.y - 1][parent_state->coordinate.x].y != -1 
+		 && parent_state->coordinate.y - 1 != -1 ){
 			new_state.coordinate.x = parent_state->coordinate.x;
 			new_state.coordinate.y = parent_state->coordinate.y - 1;
-		 }else if (action == 4 && !(parent_state->coordinate.y + 1 > parent_state->Map_Size * 2) && map[parent_state->coordinate.y + 1][parent_state->coordinate.x].y != -1 && parent_state->coordinate.y + 1 != -1 && parent_state->coordinate.x != -1 ){
+		 }
+		 else if (action == 4 && !(parent_state->coordinate.y + 1 > parent_state->Map_Size * 2) 
+		 && map[parent_state->coordinate.y + 1][parent_state->coordinate.x].y != -1 
+		 && parent_state->coordinate.y + 1 != -1 && parent_state->coordinate.x != -1 ){
 			new_state.coordinate.x = parent_state->coordinate.x;			
 			new_state.coordinate.y = parent_state->coordinate.y + 1;
-		 }else if (action == 5 && !(parent_state->coordinate.y + 1 > parent_state->Map_Size * 2) && map[parent_state->coordinate.y - 1][parent_state->coordinate.x + 1].y && map[parent_state->coordinate.y - 1][parent_state->coordinate.x + 1].x != -1 && parent_state->coordinate.x - 1 != -1 && parent_state->coordinate.y + 1 != -1){
+		 }
+		 else if (action == 5 && !(parent_state->coordinate.y + 1 > parent_state->Map_Size * 2) 
+		 && map[parent_state->coordinate.y + 1][parent_state->coordinate.x - 1].y != -1 
+		 && map[parent_state->coordinate.y + 1][parent_state->coordinate.x - 1].x != -1 
+		 && parent_state->coordinate.x - 1 != -1 && parent_state->coordinate.y + 1 != -1){
 			new_state.coordinate.x = parent_state->coordinate.x - 1;
 			new_state.coordinate.y = parent_state->coordinate.y + 1;
-		 }else{
+		 }
+		 else{
 			return FALSE;
 		 }
+
 		/* if(parent_state->coordinate.y == 300)
 		 	exit(1);
 		if(parent_state->coordinate.y == 300)
@@ -181,7 +200,11 @@ int Result(const State *const parent_state, const enum ACTIONS action, Transitio
 }
 
 float Compute_Heuristic_Function(const State *const state, const State *const goal)
-{
+{		
+		if((state->coordinate.x < goal->coordinate.x && state->coordinate.y < goal->coordinate.y) 
+		|| (state->coordinate.x > goal->coordinate.x && state->coordinate.y > goal->coordinate.y)){
+			return 	abs(state->coordinate.x - goal->coordinate.x) + abs(state->coordinate.y - goal->coordinate.y);
+		} 
 		if(abs(state->coordinate.x - goal->coordinate.x) > abs(state->coordinate.y - goal->coordinate.y))
 			return abs(state->coordinate.x - goal->coordinate.x);
 		else

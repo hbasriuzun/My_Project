@@ -282,7 +282,6 @@ Node* Child_Node(Node *const parent, const enum ACTIONS action,COORDINATE** map)
 Queue* Start_Frontier(Node *const root)
 {
     Queue *frontier = (Queue*)malloc(sizeof(Queue));
-	printf("============= FRONTIER %d",root->state.Map_Size);
 	if(frontier==NULL)
     	Warning_Memory_Allocation(); 
     	
