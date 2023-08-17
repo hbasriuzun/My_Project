@@ -79,7 +79,7 @@ int main() {
 
     // Okunan verileri işleme ve çıktı üretme
     for ( Customer& customer : customers) {
-        i=0;
+        
         // if(customer.y == "yes")
         //     customer.y = (std::string)"1";
         // else
@@ -89,7 +89,7 @@ int main() {
         //     count++;
         //     std::cout << i << count << ". Müşteri" << std::endl;
         // }
-        std::cout << i << ": " << customer.y << ",slm" << customer.previous << std::endl;
+        std::cout<< "i number:" << i << "customer: " << customer.y << ",slm" << customer.previous << std::endl;
         i++;
         // Diğer verileri de benzer şekilde yazdırabilirsiniz
     }
