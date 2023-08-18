@@ -85,11 +85,12 @@ int main() {
         // else
         //     customer.y = (std::string)"0";
         
-        // if(customer.y == "yes" && customer.previous > 0){
-        //     count++;
-        //     std::cout << i << count << ". Müşteri" << std::endl;
-        // }
-        std::cout<< "i number:" << i << "customer: " << customer.y << ",slm" << customer.previous << std::endl;
+        if(customer.y == "\"yes\"" && customer.previous > 0){
+            count++;
+            std::cout << i << count << ". Müşteri" << std::endl;
+        }
+        std::cout << "i number:" << i << " customer: "  << customer.y  << std::endl;
+        std::cout << " customer previous: " << customer.previous << std::endl;
         i++;
         // Diğer verileri de benzer şekilde yazdırabilirsiniz
     }
