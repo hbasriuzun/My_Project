@@ -6,16 +6,63 @@
 using namespace std;
 
 int main() {
-	int n,e,fr,sc;
-	cin >> n >> e;
-	vector<vector<int>> nd(n);
-	for(int i=0; i<e; i++){
-	    cin >> fr >> sc;
-	    nd[fr].push_back(sc);
-	    nd[sc].push_back(fr);
+	stack<char> s;
+	char a;
+	int si,check=0,check2;
+	cin >> si;
+	cin >> a;
+	if(a == ')' || a == ']' || a == '}'){
+		cout << "NO";
+		return 0;
+	}else{
+		s.push(a);
+		check2=1;
 	}
-	for(int i=0; i<n; i++){
-	    cout << nd[i].size() << " ";
+
+	for(int i=0; i<si-2;i++){
+			
+		if(s.empty()){
+			check++;
+		}
+		if(check2 == 1){
+			check2 = 0;
+		}
+		cin >> a;
+		if(a == '(' || a == '[' || a == '{'){
+			s.push(a);
+		}
+		else if(a == ')'){
+			if(s.empty() || s.top() != '('){
+				cout << "NO";
+				return 0;
+			}
+			else{
+				s.pop();
+			}
+		}
+		else if(a == ']'){
+			if(s.empty() || s.top() != '['){
+				cout << "NO";
+				return 0;
+			}
+			else{
+				s.pop();
+			}
+		}
+		else if(a == '}'){
+			if(s.empty() || s.top() != '{'){
+				cout << "NO";
+				return 0;
+			}
+			else{
+				s.pop();
+			}
+		}
 	}
-	return 0;
+	if(check == 0){
+		cout << "NO";
+	}else{
+		cout << "YES";
+	}
+
 }
